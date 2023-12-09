@@ -14,14 +14,9 @@ server.use((req, res, next) => {
 });
 
 server.get('/stop', async (req, res) => {
+  console.log('Stopping server...');
+
   const execOutput = execSync('sudo systemctl stop terraria');
-
-  res.status(200);
-  return res.json({ message: execOutput.toString() });
-});
-
-server.get('/players', async (req, res) => {
-  const execOutput = execSync('sudo terrariad inject playing');
 
   res.status(200);
   return res.json({ message: execOutput.toString() });
