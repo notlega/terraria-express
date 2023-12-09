@@ -1,0 +1,14 @@
+**/pnpm-lock.yaml
+**/package.json
+**/package-lock.json
+**/yarn.lock
+**/node_modules
+**/dist
+**/build
+**/coverage
+**/.gitignore
+**/.eslintrc.json
+**/.prettierrc.json
+**/.vscode
+**/.github
+**/.idea
