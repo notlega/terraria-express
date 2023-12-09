@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
-import { exec } from 'node:child_process';
+import { execSync } from 'node:child_process';
 
 const server = express();
 
@@ -14,29 +14,17 @@ server.use((req, res, next) => {
 });
 
 server.get('/stop', async (req, res) => {
-  const { stdout, stderr } = await exec('sudo systemctl stop terraria');
-
-  if (stderr) {
-    console.error(`error: ${stderr}`);
-    res.status(500);
-    return res.json({ message: stderr });
-  }
+  const execOutput = execSync('sudo systemctl stop terraria');
 
   res.status(200);
-  return res.json({ message: stdout });
+  return res.json({ message: execOutput.toString() });
 });
 
 server.get('/players', async (req, res) => {
-  const { stdout, stderr } = await exec('sudo terrariad inject playing');
-
-  if (stderr) {
-    console.error(`error: ${stderr}`);
-    res.status(500);
-    return res.json({ message: stderr });
-  }
+  const execOutput = execSync('sudo terrariad inject playing');
 
   res.status(200);
-  return res.json({ message: stdout });
+  return res.json({ message: execOutput.toString() });
 });
 
 (async () => {
